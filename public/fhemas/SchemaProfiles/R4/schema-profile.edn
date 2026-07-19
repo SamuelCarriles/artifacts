@@ -1,6 +1,6 @@
 {:resource-type "SchemaProfile"
  :id "fhir-r4-schema-profile"
- :url "https://SamuelCarriles.github.io/fhemas.artifacts/R4/schema-profile.edn"
+ :url "https://samuelcarriles.github.io/artifacts/fhemas/SchemaProfiles/R4/schema-profile.edn"
  :version "1.0.0"
  :title "FHIR R4 Schema Profile"
  :status :active

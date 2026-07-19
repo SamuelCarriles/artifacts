@@ -23,15 +23,6 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      - name: Install tree utility
-        run: sudo apt-get install -y tree
-
-      - name: Generate Automatic Directory Index inside Public
-        run: |
-          mkdir -p public
-          cd public
-          tree -H '.' -L 4 --noreport --charset utf-8 -T "Artifacts and Conformance Resources" -o index.html
-
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
