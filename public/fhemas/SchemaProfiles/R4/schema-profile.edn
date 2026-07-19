@@ -1,0 +1,153 @@
+{:resource-type "SchemaProfile"
+ :id "fhir-r4-schema-profile"
+ :url "https://SamuelCarriles.github.io/fhemas.artifacts/R4/schema-profile.edn"
+ :version "1.0.0"
+ :title "FHIR R4 Schema Profile"
+ :status :active
+ :description "Defines how to parse and compile FHIR R4 StructureDefinitions to validate resources"
+ :fhir-version "4.0.1"
+ :source "https://hl7.org/fhir/R4/structuredefinition.html"
+ :schema {:meta [{:path [:id]
+                  :type :string
+                  :max 1}
+
+                 {:path [:url]
+                  :type :uri
+                  :min 1
+                  :max 1}
+
+                 {:path [:type]
+                  :type :uri
+                  :min 1
+                  :max 1}
+
+                 {:path [:name]
+                  :type :string
+                  :min 1
+                  :max 1}
+
+                 {:path [:version]
+                  :type :string
+                  :max 1}
+
+                 {:path [:fhir-version]
+                  :type :string
+                  :max 1}
+
+                 {:path [:status]
+                  :type :string
+                  :min 1
+                  :max 1}
+
+                 {:path [:experimental]
+                  :type :boolean
+                  :max 1}
+
+                 {:path [:context]
+                  :type :vector}]
+
+          :definition [{:path [:kind]
+                        :type :string
+                        :min 1
+                        :max 1}
+
+                       {:path [:abstract]
+                        :type :boolean
+                        :min 1 :max 1}
+
+                       {:path [:base-definition]
+                        :type :uri
+                        :max 1}
+
+                       {:path [:derivation]
+                        :type :string
+                        :max 1}]
+
+          :invariants [{:path [:context-invariant]
+                        :type :vector}]
+
+          :elements {:snapshot {:path [:snapshot :element]}
+                     :differential {:path [:differential :element]}
+                     :fields [{:path [:path]
+                               :type :string
+                               :min 1
+                               :max 1}
+
+                              {:path [:id]
+                               :type :string
+                               :max 1}
+
+                              {:path [:slice-name]
+                               :type :string
+                               :max 1}
+
+                              {:path [:slice-is-constraining]
+                               :type :boolean
+                               :max 1}
+
+                              {:path [:min]
+                               :type :integer
+                               :max 1}
+
+                              {:path [:max]
+                               :type :string
+                               :max 1}
+
+                              {:path [:base]
+                               :type :map
+                               :max 1}
+
+                              {:path [:slicing]
+                               :type :map
+                               :max 1
+                               :compile-as :fhemas.compile.r4/slicing}
+
+                              {:path [:type]
+                               :type :vector}
+
+                              {:path [:content-reference]
+                               :type :uri
+                               :max 1
+                               :compile-as :fhemas.compile.r4/content-reference}
+
+                              {:path {:re-str "^fixed-.*$"}
+                               :type [:string :integer :boolean :map :vector :uri]
+                               :max 1 :compile-as :fhemas.compile.r4/fixed-value}
+
+                              {:path {:re-str "^pattern-.*$"}
+                               :type [:string :integer :boolean :map :vector :uri]
+                               :max 1
+                               :compile-as :fhemas.compile.r4/pattern-value}
+
+                              {:path {:re-str "^min-value-.*$"}
+                               :type [:integer :string :map]
+                               :max 1
+                               :compile-as :fhemas.compile.r4/min-value}
+
+                              {:path {:re-str "^max-value-.*$"}
+                               :type [:integer :string :map]
+                               :max 1
+                               :compile-as :fhemas.compile.r4/max-value}
+
+                              {:path [:max-length]
+                               :type :integer
+                               :max 1
+                               :compile-as :fhemas.compile.r4/max-length}
+
+                              {:path [:constraint]
+                               :type :vector
+                               :constraint {:fhirpath {:id :key
+                                                       :severity :severity
+                                                       :description :human
+                                                       :expression :expression}}}
+
+                              {:path [:condition]
+                               :type :vector}
+
+                              {:path [:short]
+                               :type :string
+                               :max 1}
+
+                              {:path [:definition]
+                               :type :string
+                               :max 1}]}}}
