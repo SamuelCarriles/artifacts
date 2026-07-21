@@ -1,6 +1,6 @@
 {:resource-type "SchemaProfile"
  :id "fhir-r4-schema-profile"
- :url "https://raw.githubusercontent.com/SamuelCarriles/artifacts/main/fhemas/SchemaProfiles/R4/schema-profile.edn"
+ :url "https://SamuelCarriles.github.io/fhemas.artifacts/R4/schema-profile.edn"
  :version "1.0.0"
  :title "FHIR R4 Schema Profile"
  :status :active
@@ -41,10 +41,7 @@
 
                  {:path [:experimental]
                   :type :boolean
-                  :max 1}
-
-                 {:path [:context]
-                  :type :vector}]
+                  :max 1}]
 
           :definition [{:path [:kind]
                         :type :string
@@ -64,18 +61,21 @@
                         :max 1}]
 
           :invariants [{:path [:context-invariant]
-                        :type :vector}]
+                        :type :vector
+                        :compile/field :fhemas.compile.r4/fhirpath-constraint}]
 
           :elements {:snapshot {:path [:snapshot :element]}
                      :differential {:path [:differential :element]}
                      :fields [{:path [:path]
                                :type :string
                                :min 1
-                               :max 1}
+                               :max 1
+                               :compile/field :fhemas.compile.r4/path}
 
                               {:path [:id]
                                :type :string
-                               :max 1}
+                               :max 1
+                               :compile/field :fhemas.compile.r4/id}
 
                               {:path [:slice-name]
                                :type :string
@@ -87,67 +87,57 @@
 
                               {:path [:min]
                                :type :integer
-                               :max 1}
+                               :max 1
+                               :compile/field :fhemas.compile.r4/min-cardinality}
 
                               {:path [:max]
                                :type :string
-                               :max 1}
-
-                              {:path [:base]
-                               :type :map
-                               :max 1}
+                               :max 1
+                               :compile/field :fhemas.compile.r4/max-cardinality}
 
                               {:path [:slicing]
                                :type :map
                                :max 1
-                               :compile-as :fhemas.compile.r4/slicing}
+                               :compile/with-group :fhemas.compile.r4/slicing}
 
                               {:path [:type]
-                               :type :vector}
+                               :type :vector
+                               :compile/field :fhemas.compile.r4/type}
 
                               {:path [:content-reference]
                                :type :uri
                                :max 1
-                               :compile-as :fhemas.compile.r4/content-reference}
+                               :compile/with-group :fhemas.compile.r4/content-reference}
 
                               {:path {:re-str "^fixed-.*$"}
                                :type [:string :integer :boolean :map :vector :uri]
-                               :max 1 :compile-as :fhemas.compile.r4/fixed-value}
+                               :max 1 :compile/field :fhemas.compile.r4/fixed-value}
 
                               {:path {:re-str "^pattern-.*$"}
                                :type [:string :integer :boolean :map :vector :uri]
                                :max 1
-                               :compile-as :fhemas.compile.r4/pattern-value}
+                               :compile/field :fhemas.compile.r4/pattern-value}
 
                               {:path {:re-str "^min-value-.*$"}
                                :type [:integer :string :map]
                                :max 1
-                               :compile-as :fhemas.compile.r4/min-value}
+                               :compile/field :fhemas.compile.r4/min-value}
 
                               {:path {:re-str "^max-value-.*$"}
                                :type [:integer :string :map]
                                :max 1
-                               :compile-as :fhemas.compile.r4/max-value}
+                               :compile/field :fhemas.compile.r4/max-value}
 
                               {:path [:max-length]
                                :type :integer
                                :max 1
-                               :compile-as :fhemas.compile.r4/max-length}
+                               :compile/field :fhemas.compile.r4/max-length}
 
                               {:path [:constraint]
                                :type :vector
-                               :constraint {:fhirpath {:id :key
-                                                       :severity :severity
-                                                       :description :human
-                                                       :expression :expression}}}
+                               :compile/field :fhemas.compile.r4/fhirpath-constraint}
 
                               {:path [:condition]
-                               :type :vector}
+                               :type :vector
+                               :compile/field :fhemas.compile.r4/condition}]}}}
 
-                              {:path [:short]
-                               :type :string
-                               :max 1}
-
-                              {:path [:definition]
-                               :type :string
-                               :max 1}]}}}
