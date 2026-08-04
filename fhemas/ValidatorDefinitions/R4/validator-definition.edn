@@ -1,10 +1,10 @@
-{:resource-type "SchemaProfile"
- :id "fhir-r4-schema-profile"
- :url "https://SamuelCarriles.github.io/fhemas.artifacts/R4/schema-profile.edn"
+{:resource-type "ValidatorDefinition"
+ :id "fhir-r4-validator-definition"
+ :url "https://raw.githubusercontent.com/SamuelCarriles/artifacts/main/fhemas/ValidatorDefinitions/R4/validator-definition.edn"
  :version "1.0.0"
- :title "FHIR R4 Schema Profile"
+ :title "FHIR R4 Validator Definition"
  :status :active
- :description "Defines how to parse and compile FHIR R4 StructureDefinitions to validate resources"
+ :description "Defines how to parse, compose and build the correct pipeline to validate FHIR R4 resources basen on official package."
  :fhir-version "4.0.1"
  :source "https://hl7.org/fhir/R4/structuredefinition.html"
  :schema {:meta [{:path [:id]
