@@ -38,7 +38,7 @@
 
           :invariants [{:path [:context-invariant]
                         :type :vector
-                        :compile/field :fhemas.compile.r4/fhirpath-constraint}]
+                        :compile/field :fhemas.compile.r4/fhirpath-constraints}]
 
           :elements {:base-definition {:path [:base-definition]}
                      :snapshot {:path [:snapshot :element]
