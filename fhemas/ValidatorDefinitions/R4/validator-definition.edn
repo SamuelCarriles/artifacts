@@ -1,71 +1,51 @@
 {:resource-type "ValidatorDefinition"
- :id "fhir-r4-validator-definition"
+
+ :id "fhir-4.0.1-validator-definition"
+
  :url "https://raw.githubusercontent.com/SamuelCarriles/artifacts/main/fhemas/ValidatorDefinitions/R4/validator-definition.edn"
+
  :version "1.0.0"
+
  :title "FHIR R4 Validator Definition"
+
  :status :active
+
  :description "Defines how to parse, compose and build the correct pipeline to validate FHIR R4 resources basen on official package."
+
  :fhir-version "4.0.1"
- :source "https://hl7.org/fhir/R4/structuredefinition.html"
- :schema {:meta [{:path [:id]
+ 
+ :schema {:source "https://hl7.org/fhir/R4/structuredefinition.html"
+
+          :identifier {:path [:url]}
+
+          :base "http://hl7.org/fhir/StructureDefinition/StructureDefinition" 
+
+          :meta [{:path [:fhir-version] 
                   :type :string
-                  :max 1}
-
-                 {:path [:url]
-                  :type :uri
-                  :min 1
-                  :max 1}
-
-                 {:path [:type]
-                  :type :uri
-                  :min 1
-                  :max 1}
-
-                 {:path [:name]
-                  :type :string
-                  :min 1
-                  :max 1}
-
-                 {:path [:version]
-                  :type :string
-                  :max 1}
-
-                 {:path [:fhir-version]
-                  :type :string
-                  :max 1}
+                  :max 1
+                  :compile/field :fhemas.compile.r4/structure-definition-fhir-version}
 
                  {:path [:status]
                   :type :string
                   :min 1
-                  :max 1}
+                  :max 1
+                  :compile/field :fhemas.compile.r4/structure-definition-status}
 
                  {:path [:experimental]
                   :type :boolean
-                  :max 1}]
-
-          :definition [{:path [:kind]
-                        :type :string
-                        :min 1
-                        :max 1}
-
-                       {:path [:abstract]
-                        :type :boolean
-                        :min 1 :max 1}
-
-                       {:path [:base-definition]
-                        :type :uri
-                        :max 1}
-
-                       {:path [:derivation]
-                        :type :string
-                        :max 1}]
+                  :max 1
+                  :compile/field :fhemas.compile.r4/structure-definition-experimental}]
 
           :invariants [{:path [:context-invariant]
                         :type :vector
                         :compile/field :fhemas.compile.r4/fhirpath-constraint}]
 
-          :elements {:snapshot {:path [:snapshot :element]}
+          :elements {:base-definition {:path [:base-definition]}
+                     :snapshot {:path [:snapshot :element]
+                                :compile/field :fhemas.compile.r4/inheritance}
+
                      :differential {:path [:differential :element]}
+
                      :fields [{:path [:path]
                                :type :string
                                :min 1
@@ -139,5 +119,10 @@
 
                               {:path [:condition]
                                :type :vector
-                               :compile/field :fhemas.compile.r4/condition}]}}}
+                               :compile/field :fhemas.compile.r4/condition}
+
+                              {:path [:binding]
+                               :type :map
+                               :max 1
+                               :compile/field :fhemas.compile.r4/binding}]}}}
 
