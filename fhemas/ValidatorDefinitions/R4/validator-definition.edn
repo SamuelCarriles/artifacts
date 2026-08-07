@@ -10,17 +10,36 @@
 
  :status :active
 
- :description "Defines how to parse, compose and build the correct pipeline to validate FHIR R4 resources basen on official package."
+ :description "A validator definition that specifies how to parse, validate, and process FHIR R4 resources according to the official HL7 FHIR R4 specification. It defines the structure, constraints, and compilation rules needed to build validators for FHIR resources."
 
  :fhir-version "4.0.1"
- 
+
+ :indexes [{:name :idx/url->resource
+            :key {:path [:url]}
+            :relation :1->1}
+
+           {:name :idx/structure-definition.name->url
+            :when [{:resource-type "StructureDefinition"}]
+            :key {:path [:name]}
+            :value {:path [:url]}
+            :relation :1->1}
+
+           {:name :idx/structure-definition.kind->urls
+            :when [{:resource-type "StructureDefinition"}]
+            :key {:path [:kind]}
+            :value {:path [:url]}
+            :relation :1->*}
+
+           {:name :idx/resource-type->urls
+            :key {:path [:resource-type]}
+            :value {:path [:url]}
+            :relation :1->*}]
+
  :schema {:source "https://hl7.org/fhir/R4/structuredefinition.html"
 
-          :identifier {:path [:url]}
+          :base "http://hl7.org/fhir/StructureDefinition/StructureDefinition"
 
-          :base "http://hl7.org/fhir/StructureDefinition/StructureDefinition" 
-
-          :meta [{:path [:fhir-version] 
+          :meta [{:path [:fhir-version]
                   :type :string
                   :max 1
                   :compile/field fhemas.compile.r4/structure-definition-fhir-version}
@@ -92,21 +111,18 @@
                                :compile/group fhemas.compile.r4/content-reference}
 
                               {:path {:re-str "^fixed-.*$"}
-                               :type [:string :integer :boolean :map :vector :uri]
-                               :max 1 :compile/field fhemas.compile.r4/fixed-value}
+                               :max 1
+                               :compile/field fhemas.compile.r4/fixed-value}
 
                               {:path {:re-str "^pattern-.*$"}
-                               :type [:string :integer :boolean :map :vector :uri]
                                :max 1
                                :compile/field fhemas.compile.r4/pattern-value}
 
                               {:path {:re-str "^min-value-.*$"}
-                               :type [:integer :string :map]
                                :max 1
                                :compile/field fhemas.compile.r4/min-value}
 
                               {:path {:re-str "^max-value-.*$"}
-                               :type [:integer :string :map]
                                :max 1
                                :compile/field fhemas.compile.r4/max-value}
 
